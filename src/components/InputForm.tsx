@@ -145,8 +145,8 @@ export function InputForm({ onSubmit, isDarkMode }: InputFormProps) {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Project Details</h2>
       </div>
 
-      <div className="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-lg border border-emerald-100 dark:border-emerald-900/30">
-        <p className="text-sm text-emerald-800 dark:text-emerald-300">
+      <div className="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/40 rounded-lg border border-emerald-100 dark:border-emerald-700/50">
+        <p className="text-sm text-emerald-800 dark:text-emerald-200">
           Fill out the details below. Our AI-powered engine will analyze your inputs to estimate the environmental impact.
         </p>
       </div>

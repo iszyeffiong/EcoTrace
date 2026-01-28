@@ -20,7 +20,6 @@ export interface ImpactResults {
   sustainabilityRisk: 'low' | 'medium' | 'high';
   materialImpact: { name: string; value: number }[];
   energyBreakdown: { name: string; value: number }[];
-  recommendations?: string[];
 }
 
 export default function App() {
@@ -82,8 +81,7 @@ export default function App() {
         "energyUse": number (estimated annual energy use in MWh),
         "sustainabilityRisk": "low" | "medium" | "high",
         "materialImpact": [{"name": "string", "value": number (impact score 0-100)}],
-        "energyBreakdown": [{"name": "string", "value": number (impact score 0-100)}],
-        "recommendations": ["string"] (3-5 specific, actionable recommendations to reduce environmental impact based on the project details)
+        "energyBreakdown": [{"name": "string", "value": number (impact score 0-100)}]
       }
     `;
 
@@ -195,29 +193,12 @@ export default function App() {
       value: energyImpacts[energy as keyof typeof energyImpacts] || 30,
     }));
 
-    // Generate fallback recommendations based on data
-    const fallbackRecommendations: string[] = [];
-    if (data.energySources.includes('coal') || data.energySources.includes('diesel')) {
-      fallbackRecommendations.push('Consider transitioning to renewable energy sources like solar or wind to significantly reduce CO₂ emissions.');
-    }
-    if (data.materials.includes('concrete') || data.materials.includes('steel')) {
-      fallbackRecommendations.push('Explore using recycled or low-carbon alternatives for high-impact materials like concrete and steel.');
-    }
-    if (!data.materials.includes('recycled')) {
-      fallbackRecommendations.push('Incorporate recycled materials where possible to reduce virgin resource consumption.');
-    }
-    if (sustainabilityRisk === 'high') {
-      fallbackRecommendations.push('Consider reducing project size or phasing construction to minimize peak environmental impact.');
-    }
-    fallbackRecommendations.push('Implement energy monitoring systems to track and optimize consumption over the project lifecycle.');
-
     return {
       co2Footprint,
       energyUse,
       sustainabilityRisk,
       materialImpact,
       energyBreakdown,
-      recommendations: fallbackRecommendations.slice(0, 5),
     };
   };
 
@@ -228,19 +209,14 @@ export default function App() {
 
         <HeroSection isDarkMode={isDarkMode} />
 
-        <main id="analysis-form" className="container mx-auto px-4 py-8 max-w-7xl">
+        <main id="project-form" className="container mx-auto px-4 py-8 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="order-1 lg:order-1">
               <InputForm onSubmit={handleFormSubmit} isDarkMode={isDarkMode} />
             </div>
 
             <div className="order-2 lg:order-2">
-              <ResultsVisualization
-                results={results}
-                isDarkMode={isDarkMode}
-                isLoading={isLoading}
-                projectData={projectData}
-              />
+              <ResultsVisualization results={results} isDarkMode={isDarkMode} isLoading={isLoading} />
             </div>
           </div>
         </main>

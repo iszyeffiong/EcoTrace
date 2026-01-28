@@ -56,10 +56,10 @@ export function Footer({ isDarkMode }: FooterProps) {
               Have questions or suggestions?
             </p>
             <a
-              href="mailto:info@envimpact.com"
+              href="mailto:ieffiong1991@gmail.com"
               className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
             >
-              info@envimpact.com
+              ieffiong1991@gmail.com
             </a>
           </div>
         </div>
